@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment-6 English Janala</title>
+    <!-- daisi ui setup  -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <!-- google font setup  -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Tiro+Bangla:ital@0;1&display=swap" rel="stylesheet">
+    <!-- font awesome cdn  -->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <!-- SWEET ALERT CDN FOR OPTIONAL PART -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <style>
+        /* font  */
+        .poppins {
+            font-family: "Poppins", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        .hind-siliguri {
+            font-family: "Hind Siliguri", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        .tiro-bangla{
+            font-family: "Tiro Bangla", serif;
+            font-weight: 400;
+            font-style: normal;
+        }
+      .inter{
+            font-family: "Inter", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+}
+
+        .title{
+            color: #18181B;
+        }
+        .secondary-title{
+            color:#00BCFF
+        }
+        .active{
+          background: #422ad5;
+          color: white;
+        }
+    </style>
+</head>
+<body>
+<header class="poppins ">
+    <!-- top menu section  -->
+     <section id="nav-bar" class="hidden fixed w-full bg-[rgba(255,255,255,.96)] z-10 bg-gradient-to-r from-[#FFFFFF30] to-[#00000012] py-6 border-b-1 border-[#C6BDBD] inset-shadow-sm inset-shadow-[#C6BDBD] px-5">
+     <!-- nav bar start  -->
+          <nav class=" flex items-center justify-between container mx-auto">
+             <!-- logo  -->
+              <div class="flex items-center" >
+                 <h3 class="title font-semibold text-xl mr-2">English</h3>
+                 <img src="./assets/logo.png" alt="">
+                 <h3 class="tiro-bangla font-semibold text-xl text-black ml-2">জানালা</h3>
+             </div>
+             <!-- button  -->
+             <div class="space-x-1">
+                
+                <button onclick="scrollToFaq()" class="font-semibold btn btn-outline btn-primary hover:bg-[#422AD5] hover:text-white"><span><i class="text-[16px] fa-solid fa-circle-question"></i></span>FAQ</button>  
+                <button onclick="scrollToVoca()" class="font-semibold btn btn-outline btn-primary hover:bg-[#422AD5] hover:text-white"><span><i class="fa-solid fa-book-open"></i></span>Learn</button>  
+                <button id="logout-btn" class="font-semibold btn btn-outline btn-primary hover:bg-[#422AD5] hover:text-white"><span><i class="fa-solid fa-right-from-bracket"></i></span>Logout</button>
+             </div>
+          </nav>
+     </section>
+     <!-- banner section start  -->
+      <section id="banner-section" class="py-24 flex items-center justify-between container mx-auto px-5">
+        <!-- title  -->
+         <div class="space-y-8">
+            <h2 class="title font-bold text-5xl"><span class="secondary-title">English</span> is Easy!!</h2>
+            <p class="hind-siliguri font-medium text-2xl title w-8/12">আজ থেকেই আপনার ভাষা শেখার যাত্রা শুরু করুন। আপনি যদি নতুন হন অথবা আপনার দক্ষতা বাড়াতে চান, আমাদের Interactive Lessons আপনাকে নিয়ে যাবে অন্য একটি Level এ</p>
+            <!-- input name and pass  -->
+                <input id="name-field" type="text" placeholder="Enter Your Name" class="input block my-6" />
+                <input id="password-field" type="password" placeholder="Enter Login Code(123456)" class="input block" />
+                <button id="submit-btn" class="px-3 py-5 mt-3 rounded-sm border-1 border-[#3D26C7] btn bg-[#422AD5] text-white">Get Started</button>
+
+         </div>
+         <!-- banner image -->
+          <div class="w-9/12">
+            <img src="./assets/hero-student.png" alt="">
+          </div>
+      </section>
+</header>
+<main id="main" class="hidden poppins py-48">
+    <!-- vocabularies section start  -->
+     <section id="vocabularies-section" class="container mx-auto pt-44 pb-20">
+        <!-- title  -->
+         <h2 class="font-bold text-4xl title text-center"><span class="secondary-title">Let's</span> Learn Vocabularies</h2>
+         <!-- dynamic button of lesson from api  -->
+          <div id="lesson-container" class="container mx-auto flex items-center justify-center gap-5 mt-11">
+            
+          </div>
+     </section>
+         <!-- LOADER SECTION  -->
+         <section id="loader" class="text-center py-5 hidden col-span-full">
+          <span class="loading loading-dots loading-xl"></span>
+        </section>
+     <!-- vocabularies dynamic word card section  -->
+      <section class="">
+        <!-- card container  -->
+         <div id="word-card-container" class="bg-[#F8F8F8] py-12 container mx-auto grid grid-cols-3 gap-5 items-center justify-around px-5" >
+
+       
+
+            <!-- default show section  -->
+              <div id="default-show-first" class="bg-[#f8f8f8] rounded-2xl mt-9 pt-11 pb-12 col-span-full">
+                 <h5 class="text-sm font-bold text-[#141414] text-center hind-siliguri">আপনি এখনো কোন Lesson Select করেন নি</h5>
+                 <h2 class="text-[#292524] font-semibold text-center my-6 text-3xl hind-siliguri">একটি Lesson Select করুন।</h2>
+                 </div>
+
+      
+         </div>
+    
+      </section>
+      <!-- modal section  -->
+      <!-- Open the modal using ID.showModal() method -->
+<!-- Open the modal using ID.showModal() method -->
+<dialog id="word_details_modal" class="modal">
+  <div class="modal-box max-w-[600px]">
+    <div id="modal-container">
+      
+    </div>
+    <div class="modal-action justify-start">
+      <form method="dialog">
+        <!-- if there is a button in form, it will close the modal -->
+        <button class="cursor-pointer bg-[#422AD5] hind-siliguri text-white font-medium text-2xl rounded-md block py-2 px-5 mt-3 flex justify-start">Complete Learning</button>
+      </form>
+    </div>
+  </div>
+</dialog>
+     <!-- faq section  -->
+      <section id="faq-section" class="container mx-auto py-48 px-6">
+        <!-- title  -->
+        <h2 class="font-bold text-4xl title text-center pt-9 pb-13"><span class="secondary-title">Frequently</span> Asked Questions</h2>
+
+        <!-- accordion  --> 
+          <div class="collapse collapse-plus bg-[#F8F8F8] border border-base-300 mb-3">
+            <input type="radio" name="my-accordion-3" checked="checked" />
+            <div class="collapse-title font-semibold title text-xl">1.What is the difference between var,let,and const?
+            </div>
+            <div class="collapse-content text-sm text-white">
+              
+            <table class="w-[87%] border-1 border-l-gray-500 rounded-md mx-auto border-collapse">
+              <thead class="bg-[#00bcff] text-2xl">
+                  <tr>
+                      <th class="py-5 px-3 border-r border-gray-700">Sl</th>
+                      <th class="py-5 px-3 border-r border-gray-700">var</th>
+                      <th class="py-5 px-3 border-r border-gray-700">let</th>
+                      <th class="py-5 px-3 border-r border-gray-700">const</th>
+                  </tr>
+                  
+              </thead>
+              <tbody>
+                  <tr class="bg-blue-200">
+                      <td class="border-r text-[17px] font-bold text-gray-700 ">01</td>
+                      <td class="border-r text-[17px] py-3 px-5  font-semibold text-gray-700 line-height">var is a Function-scoped (or global if declared outside any function) and it can be re-Declare and re-Assigned in the same scope without throwing an error and var hoisted to the top of its scope and initialized it with undefined.</td>
+                      <td class="border-r text-[17px] py-3 px-5  font-semibold text-gray-700 line-height">let is a block-scoped and if we declare a variable using let it can not be re declare but it's value can be change and update means it can be re assigned.</td>
+                      <td class="border-r text-[17px] py-3 px-5 font-semibold text-gray-700  line-height">const is also a block-scoped but it does not allow reassignment or redeclare,means if we declare a variable using const it value can not be changed if it is initially set but the contents of object or array can be modified inside const variable</td>
+                  </tr>
+              </tbody>
+          </table>
+            </div>
+          </div> 
+          <!-- 2 -->
+          <div class="collapse collapse-plus bg-[#F8F8F8] border border-base-300 mb-3">
+            <input type="radio" name="my-accordion-3" checked="checked" />
+            <div class="collapse-title font-semibold title text-xl">2.What is the difference between map(), forEach(), and filter()?
+            </div>
+            <div class="collapse-content text-sm text-white"> <table class="w-[87%] border-1 border-l-gray-300 rounded-md mx-auto border-collapse">
+              <thead class="bg-[#00bbffcc] text-2xl">
+                  <tr>
+                      <th class="py-5 px-3 border-r border-gray-300">Sl</th>
+                      <th class="py-5 px-3 border-r border-gray-300">map()</th>
+                      <th class="py-5 px-3 border-r border-gray-300">forEach()</th>
+                      <th class="py-5 px-3 border-r border-gray-300">filter()</th>
+                  </tr>
+                  
+              </thead>
+              <tbody>
+                  <tr class="bg-blue-200">
+                      <td class="border-r text-[17px] font-bold text-gray-700 ">01</td>
+                      <td class="border-r text-[17px] py-3 px-5  font-semibold text-gray-700 line-height">The map() function receives a function as a parameter and will apply the code on each given array element and returns an entirely new array. It will not change the original array.A map() function returns a new array</td>
+                      <td class="border-r text-[17px] py-3 px-5  font-semibold text-gray-700 line-height">The forEach() method is used to execute a provided function once for all element in a given array.It does not return anything ,it is used to perform a operation for all array element, which is declared in a function </td>
+                      <td class="border-r text-[17px] py-3 px-5 font-semibold text-gray-700 line-height">The filter() method return a new array with all array element that pass a test which is provided by a function</td>
+                  </tr>
+              </tbody>
+          </table></div>
+          </div> 
+          
+          <!-- 3 -->
+
+         <div class="collapse collapse-plus bg-[#F8F8F8] border border-base-300 mb-3">
+            <input type="radio" name="my-accordion-3" checked="checked" />
+            <div class="collapse-title font-semibold title text-xl">3.Explain arrow functions and how they are different from regular functions.
+            </div>
+            <div class="collapse-content text-[#62748E] text-[17px] px-9">Arrow Function is introduced in ES6,it is a simple and easy way for writing function in JavaScript.The difference between arrow function and regular function is that arrow function has a shorter syntax and does not have its own arguments object while a regular function has an arguments object.
+            </div>
+          </div>  
+          
+          <!-- 4  -->
+
+         <div class="collapse collapse-plus bg-[#F8F8F8] border border-base-300 mb-3">
+            <input type="radio" name="my-accordion-3" checked="checked" />
+            <div class="collapse-title font-semibold title text-xl">4.How JavaScript Promises work.
+            </div>
+            <div class="collapse-content text-[17px] px-9 text-[#62748E] ">In JavaScript a promise is an object that represents the completion or failure of an asynchronous operation.A JavaScript promise object can be i.Pending,ii.Resolve,iii.Reject.A promise is starts in a Pending state and that can be either resolve(success) or reject(failure).The result is handled using .then() for success , .catch() for errors and .finally() for code that runs in both cases.This is how promise works in JavaScript.</div>
+          </div> 
+          
+          <!-- 5 -->
+          
+          <div class="collapse collapse-plus bg-[#F8F8F8] border border-base-300 mb-3">
+            <input type="radio" name="my-accordion-3" checked="checked" />
+            <div class="collapse-title font-semibold title text-xl">5.How closures work in JavaScript?.
+            </div>
+            <div class="collapse-content text-[17px] px-9 text-[#62748E]">In JavaScript when a function remembers the variables from its outer scope even after the outer function has finished executing this is called closures.When a function is created inside another function the inner function returns a reference to the outer function's variables ,this means that even after the outer function has finished execution , the inner function can still access those variables.</div>
+          </div>
+      </section>
+</main>
+<footer class="mt-16 py-20 poppins border-t-3 border-[#FFEBEB] px-5">
+  <section class="flex items-center justify-between container mx-auto">
+  <!-- logo and text -->
+       <div>
+        <!-- logo  -->
+           <div class="flex items-center" >
+                <h3 class="title font-semibold text-xl mr-2">English</h3>
+                <img src="./assets/logo.png" alt="">
+                <h3 class="tiro-bangla font-semibold text-xl text-black ml-2">জানালা</h3>
+            </div>
+            <!-- text  -->
+            <div class="">
+               <h2 class="hind-siliguri text-xl font-medium title my-3">ইংরেজি শিখুন সহজে</h2>
+               <h3 class="hind-siliguri text-black font-bold mb-3">Providing ED-Tech Applications since 2025</h3>
+            </div>
+       </div>
+   </div>
+   <!-- social icon  -->
+    <div>
+        <h3 class="text-[15px] text-[#18181B90] font-semibold">Follow us</h3>
+        <div class="flex items-center gap-3 mt-5">
+        <a href="https://www.facebook.com/" target="_blank"><img src="./assets/fb-thumb.png" alt=""></a>
+        <a href="https://www.youtube.com/" target="_blank"><img src="./assets/youtube-thumb.png" alt=""></a>
+        <a href="https://www.instagram.com/" target="_blank"><img src="./assets/instagram-thumb.png" alt=""></a>
+        </div>
+    </div>
+  </section>
+</footer>
+<script src="./js/script.js"></script>
+<script src="./js/index.js"></script>
+</body>
+</html>
